@@ -5,7 +5,7 @@ const totalItems = document.querySelector(".output");
 
 let tasks = [];
 
-function render(){
+function renderTask(){
     
     newToDo.innerHTML = '';
 
@@ -43,15 +43,33 @@ function addTask(){
 
     tasks = [...tasks, newTask];
 
-    render();
+    renderTask();
 }
 
-function removeTask(event){
+function removeTask(e){
+
+    let targetTask;
+    if (e.target.classList.contains("fa-trash-alt")){
+        targetTask = e.target.parentNode.parentNode;
+    }else if( e.target.classList.contains('removeTodo')){
+		targetTask = e.target.parentNode;
+    }else{
+        return;
+    }
+
+    const indexDelItem = targetTask.dataset.id*1;
+
+    let index = tasks.findIndex(task => task.id === indexDelItem);
 
 
+    if (index >= 0){
+        tasks.splice(index,1);
+    }
+
+    renderTask();
 }
 
-function completedTask(event){
+function completedTask(e){
     
 }
 
@@ -66,3 +84,5 @@ toDoInput.addEventListener("keyup", e =>{
         addTask();
     }
 });
+
+newToDo.addEventListener("click", removeTask);
