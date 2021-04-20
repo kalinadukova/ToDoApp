@@ -10,9 +10,10 @@ function renderTask(){
     newToDo.innerHTML = '';
 
     for (let i = 0; i < tasks.length; i++) {
-        newToDo.innerHTML += `<li data-id=${tasks[i].id}>
-        <span>${tasks[i].id}.</span>
-        <span>${tasks[i].title}</span>
+        newToDo.innerHTML += 
+        `<li data-id=${tasks[i].id}>
+        <span class="todoID">${tasks[i].id}.</span>
+        <span class="${tasks[i].completed?'completed': ''}">${tasks[i].title}</span>
         <div class="removeTodo"><i class="far fa-trash-alt"></i></div>
         </li>`;
     }
@@ -57,10 +58,9 @@ function removeTask(e){
         return;
     }
 
-    const indexDelItem = targetTask.dataset.id*1;
+    let indexDelItem = targetTask.dataset.id*1;
 
     let index = tasks.findIndex(task => task.id === indexDelItem);
-
 
     if (index >= 0){
         tasks.splice(index,1);
@@ -69,12 +69,27 @@ function removeTask(e){
     renderTask();
 }
 
-function completedTask(e){
-    
+function completeTask(e){
+    let targetTask;
+    if (e.target.tagName === "LI"){
+        targetTask = e.target;
+    }else if( e.target.tagName === 'SPAN'){
+		targetTask = e.target.parentElement;
+    }else{
+        return;
+    }
+
+    let completedIdx = targetTask.dataset.id*1;
+
+    let index = tasks.findIndex(task => task.id === completedIdx);
+
+    tasks[index].completed = !tasks[index].completed;
+
+    renderTask();
 }
 
 function countTasks(){
-    let counter=tasks.length;
+    let counter = tasks.length;
     totalItems.innerHTML = counter;
 }
 
@@ -86,3 +101,4 @@ toDoInput.addEventListener("keyup", e =>{
 });
 
 newToDo.addEventListener("click", removeTask);
+newToDo.addEventListener("click", completeTask);
