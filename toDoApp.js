@@ -5,7 +5,7 @@ const totalItems = document.querySelector(".output");
 
 let tasks = [];
 
-function renderTask(){
+let renderTask = function (){
     
     newToDo.innerHTML = '';
 
@@ -17,6 +17,7 @@ function renderTask(){
         <div class="removeTodo"><i class="far fa-trash-alt"></i></div>
         </li>`;
     }
+
 
     countTasks();
     toDoInput.value='';
@@ -92,6 +93,21 @@ function countTasks(){
     let counter = tasks.length;
     totalItems.innerHTML = counter;
 }
+
+// let tasksURL = "https://jsonplaceholder.typicode.com/todos";
+let tasksURL = "http://localhost:3000/todos";
+
+function fetchTasks(url){
+	fetch(url)
+		.then(response => response.json()).then(
+            function (data){
+                tasks = data; 
+                renderTask();
+            }
+        )
+};
+
+window.addEventListener("DOMContentLoaded",е => fetchTasks(tasksURL));
 
 addBtn.addEventListener("click", addTask);
 toDoInput.addEventListener("keyup", e =>{
