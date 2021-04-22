@@ -1,0 +1,23 @@
+{
+  "name": "ToDoApp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "toDoApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalinadukova/ToDoApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalinadukova/ToDoApp/issues"
+  },
+  "homepage": "https://github.com/kalinadukova/ToDoApp#readme",
+  "dependencies": {
+    "json-server": "^0.16.3"
+  }
+}
