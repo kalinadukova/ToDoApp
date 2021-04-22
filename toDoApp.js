@@ -18,7 +18,6 @@ let renderTask = function (){
         </li>`;
     }
 
-
     countTasks();
     toDoInput.value='';
     toDoInput.focus();
